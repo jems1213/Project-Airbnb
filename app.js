@@ -43,7 +43,7 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 
 // Use a single secret for sessions & encryption - from env or fallback
-const secret = process.env.SESSION_SECRET || "superLongSecretKeyThatIsHardToGuess123!";
+const secret = process.env.SECRET ;
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
