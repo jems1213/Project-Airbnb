@@ -1,190 +1,232 @@
 <% layout("/layouts/boilerplate")%>
 
-<style>
-  /* --- Filters --- */
-  #filters {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: start;
-    gap: 1rem;
-    padding: 1rem;
-    border-bottom: 1px solid #ddd;
-  }
+  <style>
+    /* --- Filters --- */
+    #filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: start;
+      gap: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid #ddd;
+    }
 
-  .filter {
-    text-align: center;
-    opacity: 0.7;
-    transition: transform 0.3s ease, opacity 0.3s;
-    cursor: pointer;
-    width: 5rem;
-  }
-
-  .filter:hover {
-    opacity: 1;
-    transform: translateY(-4px) scale(1.05);
-    color: #0d6efd;
-  }
-
-  .filter i {
-    font-size: 1.5rem;
-    margin-bottom: 0.3rem;
-  }
-
-  .tax-info {
-    display: none;
-    color: #888;
-    font-size: 0.9rem;
-    transition: opacity 0.3s ease;
-  }
-
-  .tax-switch {
-    border: 1px solid #999;
-    border-radius: 1rem;
-    height: 3rem;
-    padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    background: #f8f9fa;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-    transition: box-shadow 0.3s ease;
-  }
-
-  .tax-switch:hover {
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  /* --- Listing Cards --- */
-  .listing-card {
-    margin: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  }
-
-  .listing-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  .listing-link {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .card-img-top {
-    width: 100%;
-    object-fit: cover;
-    border-bottom: 1px solid #eee;
-    border-radius: 0;
-    transition: transform 0.3s ease;
-  }
-
-  .card-img-overlay {
-    position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
-    color: white;
-    padding: 0.3rem 0.6rem;
-    font-size: 1rem;
-    border-radius: 0.4rem;
-  }
-
-  .card-body {
-    padding: 1rem;
-  }
-
-  .card-text {
-    font-size: 1rem;
-  }
-
-  /* --- Responsive --- */
-  @media (max-width: 768px) {
     .filter {
-      width: 4rem;
-      font-size: 0.8rem;
+      text-align: center;
+      opacity: 0.7;
+      transition: transform 0.3s ease, opacity 0.3s;
+      cursor: pointer;
+      width: 5rem;
+    }
+
+    .filter:hover {
+      opacity: 1;
+      transform: translateY(-4px) scale(1.05);
+      color: #0d6efd;
+    }
+
+    .filter i {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .tax-info {
+      display: none;
+      color: #888;
+      font-size: 0.9rem;
+      transition: opacity 0.3s ease;
     }
 
     .tax-switch {
-      margin: 1rem 0 0 0;
+      border: 1px solid #999;
+      border-radius: 1rem;
+      height: 3rem;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      background: #f8f9fa;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .tax-switch:hover {
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* --- Listing Cards --- */
+    .listing-card {
+      margin: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .listing-card:hover {
+
+      background-color: #3487f7;
+      box-shadow: 0 12px 24px rgba(247, 4, 4, 0.2),
+        0 12px 12px rgba(255, 0, 0, 0.1),
+        0 12px 4px rgba(0, 0, 0, 0.06);
+      color: #fff;
+      -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(255, 0, 0, 0.15), 0 4px 6px rgba(226, 9, 9, 0.05);
+    }
+
+    .listing-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card-img-top {
       width: 100%;
-      justify-content: center;
+      object-fit: cover;
+      border-bottom: 1px solid #eee;
+      border-radius: 0;
+      transition: transform 0.3s ease;
     }
 
-    #filters {
-      justify-content: center;
-    }
-
-    .card-img-top {
-      height: 14rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .card-img-top {
-      height: 12rem;
+    .card-img-overlay {
+      position: absolute;
+      top: 0.5rem;
+      left: 0.5rem;
+      color: white;
+      padding: 0.3rem 0.6rem;
+      font-size: 1rem;
+      border-radius: 0.4rem;
     }
 
     .card-body {
-      padding: 0.75rem;
+      padding: 1rem;
     }
 
-    .listing-card {
-      margin: 0.5rem;
+    .card-text {
+      font-size: 1rem;
     }
-  }
-</style>
 
-<!-- Filters -->
-<div id="filters">
-  <div class="filter"><div><i class="fa-solid fa-fire"></i></div><p>Trending</p></div>
-  <div class="filter"><div><i class="fa-solid fa-bed"></i></div><p>Rooms</p></div>
-  <div class="filter"><div><i class="fa-solid fa-mountain-city"></i></div><p>Iconic Cities</p></div>
-  <div class="filter"><div><i class="fa-brands fa-fort-awesome"></i></div><p>Castles</p></div>
-  <div class="filter"><div><i class="fa-solid fa-mountain-sun"></i></div><p>Mountain Views</p></div>
-  <div class="filter"><div><i class="fa-solid fa-tent"></i></div><p>Camping</p></div>
-  <div class="filter"><div><i class="fa-solid fa-person-swimming"></i></div><p>Nature</p></div>
-  <div class="filter"><div><i class="fa-solid fa-tractor"></i></div><p>Farms</p></div>
-  <div class="filter"><div><i class="fa-solid fa-snowflake"></i></div><p>Arctic</p></div>
-  <div class="filter"><div><i class="fa-solid fa-ship"></i></div><p>Boats</p></div>
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .filter {
+        width: 4rem;
+        font-size: 0.8rem;
+      }
 
-  <div class="tax-switch">
-    <div class="form-check-reverse form-switch">
-      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-      <label class="form-check-label" for="flexSwitchCheckDefault">Display Taxes</label>
+      .tax-switch {
+        margin: 1rem 0 0 0;
+        width: 100%;
+        justify-content: center;
+      }
+
+      #filters {
+        justify-content: center;
+      }
+
+      .card-img-top {
+        height: 14rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .card-img-top {
+        height: 12rem;
+      }
+
+      .card-body {
+        padding: 0.75rem;
+      }
+
+      .listing-card {
+        margin: 0.5rem;
+      }
+    }
+  </style>
+
+  <!-- Filters -->
+  <div id="filters">
+    <div class="filter">
+      <div><i class="fa-solid fa-fire"></i></div>
+      <p>Trending</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-bed"></i></div>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-mountain-city"></i></div>
+      <p>Iconic Cities</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-brands fa-fort-awesome"></i></div>
+      <p>Castles</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-mountain-sun"></i></div>
+      <p>Mountain Views</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-tent"></i></div>
+      <p>Camping</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-person-swimming"></i></div>
+      <p>Nature</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-tractor"></i></div>
+      <p>Farms</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-snowflake"></i></div>
+      <p>Arctic</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-ship"></i></div>
+      <p>Boats</p>
+    </div>
+
+    <div class="tax-switch">
+      <div class="form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Display Taxes</label>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Listings -->
-<div class="row row-cols-lg-3 row-cols-md-3 mt-3 row-cols-sm-1">
-  <% for(let listing of allListings) { %>
-    <a href="/listings/<%= listing._id%>" class="listing-link"> 
-      <div class="card col listing-card">
-        <img class="card-img-top" src="<%= listing.image.url %>" alt="listing_image" style="height: 20rem" />
-        <div class="card-img-overlay"> 
-          <i><b><u>WanderLust</u></b></i>
+  <!-- Listings -->
+  <div class="row row-cols-lg-3 row-cols-md-3 mt-3 row-cols-sm-1">
+    <% for(let listing of allListings) { %>
+      <a href="/listings/<%= listing._id%>" class="listing-link">
+        <div class="card col listing-card">
+          <img class="card-img-top" src="<%= listing.image.url %>" alt="listing_image" style="height: 20rem" />
+          <div class="card-img-overlay">
+            <i><b><u>WanderLust</u></b></i>
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              <b>
+                <%= listing.title %>
+              </b> <br>
+              &#8377; <%= listing.price %> /Night
+                <i class="tax-info">&nbsp;+18% GST</i>
+            </p>
+          </div>
         </div>
-        <div class="card-body">
-          <p class="card-text">
-            <b><%= listing.title %></b> <br>
-            &#8377; <%= listing.price %> /Night
-            <i class="tax-info">&nbsp;+18% GST</i>
-          </p>
-        </div>
-      </div>
-    </a>
-  <% } %>
-</div>
+      </a>
+      <% } %>
+  </div>
 
-<script>
-  const taxSwitch = document.getElementById("flexSwitchCheckDefault");
-  taxSwitch.addEventListener("click", () => {
-    const taxInfo = document.getElementsByClassName("tax-info");
-    for (let info of taxInfo) {
-      info.style.display = info.style.display === "inline" ? "none" : "inline";
-    }
-  });
-</script>
+  <script>
+    const taxSwitch = document.getElementById("flexSwitchCheckDefault");
+    taxSwitch.addEventListener("click", () => {
+      const taxInfo = document.getElementsByClassName("tax-info");
+      for (let info of taxInfo) {
+        info.style.display = info.style.display === "inline" ? "none" : "inline";
+      }
+    });
+  </script>
