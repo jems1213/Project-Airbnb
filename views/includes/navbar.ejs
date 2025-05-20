@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
 <style>
-  /* Navbar Styling */
   .navbar {
     background: linear-gradient(90deg, #fe424d, #ff7e5f);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -9,8 +10,11 @@
 
   .navbar-brand {
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     color: white !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .nav-link {
@@ -20,41 +24,13 @@
   }
 
   .nav-link:hover {
-    color: #fff9db !important;
+    color: #dfff00 !important;
     transform: translateY(-2px);
   }
 
-  .search-inp {
-    border-radius: 25px;
-    padding: 0.5rem 2.5rem;
-    border: none;
-    outline: none;
-    transition: box-shadow 0.3s ease-in-out;
-  }
-
-  .search-inp:focus {
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-  }
-
-  .search-btn {
-    background-color: white;
-    color: #fe424d;
-    font-weight: bold;
-    border-radius: 25px;
-    border: none;
-    padding: 0.5rem 1rem;
-    transition: all 0.3s ease-in-out;
-  }
-
-  .search-btn:hover {
-    background-color: #fff9db;
-    color: #ff4c68;
-    transform: scale(1.05);
-  }
-
   .auth-buttons .nav-link {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 0.4rem 0.8rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 0.4rem 0.9rem;
     margin-left: 0.5rem;
     border-radius: 20px;
     transition: all 0.3s ease-in-out;
@@ -64,86 +40,94 @@
   .auth-buttons .nav-link:hover {
     background-color: white;
     color: #fe424d !important;
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 
-  /* Responsive Fix: Auth buttons always visible */
+  .search-inp {
+    border-radius: 25px;
+    padding: 0.4rem 2rem;
+    border: none;
+    outline: none;
+    transition: box-shadow 0.3s ease-in-out;
+    width: 200px;
+  }
+
+  .search-inp:focus {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4);
+  }
+
+  .search-wrapper {
+    position: relative;
+  }
+
+  .search-wrapper i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: #999;
+  }
+
   @media (max-width: 768px) {
+    .search-inp {
+      width: 100%;
+    }
+
+    .navbar-collapse {
+      margin-top: 1rem;
+    }
+
     .auth-buttons {
-      flex-direction: row;
+      flex-direction: column;
       gap: 0.5rem;
+      margin-top: 1rem;
     }
 
     .auth-buttons .nav-link {
-      font-size: 0.85rem;
-    }
-  }
-
-  /* Animation - Slide In */
-  .nav-link,
-  .search-btn,
-  .search-inp {
-    animation: slideIn 0.5s ease forwards;
-    opacity: 0;
-  }
-
-  .nav-link:nth-child(1) {
-    animation-delay: 0.1s;
-  }
-
-  .nav-link:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-
-  .search-inp {
-    animation-delay: 0.3s;
-  }
-
-  .search-btn {
-    animation-delay: 0.4s;
-  }
-
-  @keyframes slideIn {
-    from {
-      transform: translateY(-10px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
+      width: 100%;
+      text-align: center;
     }
   }
 </style>
 
 <nav class="navbar navbar-expand-md sticky-top">
-  <div class="container-fluid">
-    <!-- Logo -->
-    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i> WanderLust</a>
+  <div class="container">
+    <!-- Brand -->
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-regular fa-compass"></i> WanderLust
+    </a>
 
     <!-- Toggler -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+    <button class="navbar-toggler text-white border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Collapsible Nav Links and Search -->
+    <!-- Collapsible content -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Explore</a>
-        <a class="nav-link" href="/listings/new">Create Listing</a>
+      <div class="navbar-nav me-auto">
+        <a class="nav-link" href="/listings"><i class="fa-solid fa-earth-americas me-1"></i>Explore</a>
+        <a class="nav-link" href="/listings/new"><i class="fa-solid fa-plus me-1"></i>Create Listing</a>
+        <% if (currUser) { %>
+          <a class="nav-link" href="/listings"><i class="fa-solid fa-user me-1"></i>Profile</a>
+        <% } %>
       </div>
 
-    
-    </div>
+      <!-- Search input -->
+      <div class="d-none d-md-block me-3 search-wrapper">
+        <i class="fa fa-search"></i>
+        <input type="text" class="search-inp ps-4" placeholder="Search..." />
+      </div>
 
-    <!-- Auth Buttons - Always Visible -->
-    <div class="d-flex ms-3 auth-buttons">
-      <% if (!currUser) { %>
-        <a class="nav-link" href="/signup">Sign up</a>
-        <a class="nav-link" href="/login">Log in</a>
-      <% } %>
-      <% if (currUser) { %>
-        <a class="nav-link" href="/logout">Log out</a>
-      <% } %>
+      <!-- Auth Buttons -->
+      <div class="d-flex flex-column flex-md-row auth-buttons align-items-md-center">
+        <% if (!currUser) { %>
+          <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus me-1"></i>Sign up</a>
+          <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket me-1"></i>Log in</a>
+        <% } %>
+        <% if (currUser) { %>
+          <a class="nav-link" href="/logout"><i class="fa-solid fa-sign-out-alt me-1"></i>Log out</a>
+        <% } %>
+      </div>
     </div>
   </div>
 </nav>
