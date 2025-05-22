@@ -8,7 +8,11 @@ const userSchema = new Schema({
     email: {
         type: String,
         require: true,
-    }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 userSchema.plugin(passportLocalMongoose); 

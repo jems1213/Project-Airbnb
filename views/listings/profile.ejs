@@ -1,0 +1,33 @@
+
+<% layout("layouts/boilerplate") %>
+
+<div class="container mt-5">
+  <div class="card shadow rounded p-4">
+    <div class="row align-items-center">
+      <div class="col-md-3 text-center">
+        <!-- Avatar (placeholder) -->
+        <img src="https://i.pravatar.cc/150?u=<%= user._id %>" alt="Avatar" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+      </div>
+
+      <div class="col-md-9">
+        <h2><%= user.username %></h2>
+        <p class="text-muted">Email: <%= user.email %></p>
+
+        <p><strong>Joined:</strong> <%= user.createdAt ? user.createdAt.toDateString() : "N/A" %></p>
+
+        <% if (user.listings) { %>
+          <p><strong>Your Listings:</strong> <%= user.listings.length %></p>
+        <% } %>
+
+        <% if (user.reviews) { %>
+          <p><strong>Your Reviews:</strong> <%= user.reviews.length %></p>
+        <% } %>
+
+        <div class="mt-4 d-flex gap-3">
+          
+          <a href="/logout" class="btn btn-outline-danger">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

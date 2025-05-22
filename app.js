@@ -19,6 +19,7 @@ const flash = require("connect-flash");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+const profileRouter = require("./routes/profile.js");
 
 // MongoDB connection URL - use environment variable or local fallback
 const dbUrl = process.env.DB_URL ;
@@ -44,6 +45,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 // Use a single secret for sessions & encryption - from env or fallback
 const secret = process.env.SECRET ;
+
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
@@ -76,6 +78,7 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
@@ -93,6 +96,7 @@ app.use((req, res, next) => {
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
+app.use("/profile", profileRouter);
 
 // 404 handler
 app.all("*", (err,req, res, next) => {
