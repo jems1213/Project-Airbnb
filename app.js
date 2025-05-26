@@ -98,6 +98,8 @@ app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 app.use("/profile", profileRouter);
 
+
+
 // 404 handler
 app.all("*", (err,req, res, next) => {
     next(new ExpressError(404, "Page not found!"));
@@ -114,6 +116,8 @@ app.use((err, req, res, next) => {
 app.get("/", (req, res) => {
     res.redirect("/listings"); // ⬅️ Redirect root to /listings
 });
+// If in app.js
+
 
 
 // Start server

@@ -1,19 +1,217 @@
-
-
 <footer>
-    <div class="f-info">
-        <div class="f-info-socials">
-            <i class="fa-brands fa-facebook"></i> 
-            <i class="fa-brands fa-square-instagram"></i> 
-            <i class="fa-brands fa-linkedin"></i> 
-            <i class="fa-brands fa-square-twitter"></i> 
+  <style>
+    footer {
+      background-color: #5c1717;
+      color: #e2e8f0;
+      padding: 60px 20px 40px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      width: 100%;
+    }
 
-        </div>
-        <div class="f-info-brand"> &copy; Wander Lust Private Limited </div><br/>
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 40px;
+      animation: fadeInUp 1.2s ease;
+    }
 
-        <div class="f-info-links">
-            <a href="/Privacy"> Privacy</a> &nbsp;&nbsp;
-            <a href="/Terms"> Terms </a>
-        </div>
+    .footer-heading {
+      color: #ffffff;
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+      font-size: 14px;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 8px;
+      transition: transform 0.2s ease, color 0.3s ease;
+    }
+
+    .footer-section ul li:hover {
+      transform: translateX(5px);
+    }
+
+    .footer-section ul li a {
+      color: #94a3b8;
+      text-decoration: none;
+    }
+
+    .footer-section ul li a:hover {
+      color: #facc15;
+    }
+
+    .newsletter p {
+      font-size: 14px;
+      margin: 8px 0 16px;
+      color: #cbd5e1;
+    }
+
+    .subscribe-btn {
+      background-color: #a3e635;
+      color: #0f172a;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .subscribe-btn:hover {
+      background-color: #bef264;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #334155;
+      margin-top: 40px;
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-size: 14px;
+      align-items: center;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .footer-bottom .socials a {
+      margin: 0 8px;
+    color: #94a3b8;
+      font-size: 18px;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    .footer-bottom .socials a:hover {
+      color: #38bdf8;
+      transform: scale(1.2);
+    }
+
+    .footer-bottom .legal-links a {
+      margin: 0 10px;
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-bottom .legal-links a:hover {
+      color: #fbbf24;
+    }
+
+    @media (min-width: 768px) {
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+
+
+  <div class="footer-container">
+    <!-- Newsletter -->
+     <div class="footer-section">
+
+<h3 class="footer-heading">About Us</h3>
+<a class="footer-heading" href="/listings"></a>
+     <div class="footer-brand d-flex align-items-center gap-2">
+  <i class="fa-regular fa-compass fa-lg"></i>
+  <h3 class="footer-heading m-0">WanderLust</h3>
+</div>
+
+     <br/><ul><li> <p>XFQV+472, Signature 2 
+        Internal Rd, Sarkhej,Ahmedabad,
+         Sarkhej-Okaf, <br/> Gujarat 382210</p></li></ul>
+   
+
+
+
+
+</div>
+
+    
+    <!-- Sections -->
+    <div class="footer-section">
+      <h3 class="footer-heading">Getting Started</h3>
+      <ul>
+        <li><a href="#">Introduction</a></li>
+        <li><a href="#">Documentation</a></li>
+        <li><a href="#">Usage</a></li>
+      
+        <li><a href="#">API</a></li>
+      </ul>
     </div>
+
+    <div class="footer-section">
+      <h3 class="footer-heading">Platform</h3>
+      <ul>
+        <li><a href="#">Plans & Pricing</a></li>
+        <li><a href="#">Personal Manager</a></li>
+        <li><a href="#">AI Business Writer</a></li>
+      
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3 class="footer-heading">Company</h3>
+      <ul>
+        <li><a href="#">About us</a></li>
+      
+        <li><a href="#">Our Blog</a></li>
+        
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      
+        
+      </ul>
+    </div>
+
+   
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="socials">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-x-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-dribbble"></i></a>
+    </div>  
+    <div class="legal-links">
+      <a href="terms">Terms & Conditions</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+   
+     <p>&copy; 2025 Beyond UI – All rights reserved</p>
+  </div>
 </footer>

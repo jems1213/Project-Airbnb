@@ -26,6 +26,7 @@ router
   );
 
    
+  
 
 //New Route
 router.get("/new", isLoggedIn, lisitngController.renderNewForm );

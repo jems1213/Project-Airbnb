@@ -1,33 +1,282 @@
-
 <% layout("layouts/boilerplate") %>
+<style>
+  :root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --text-color: #1f2937;
+    --muted-text: #6b7280;
+    --border-color: #e5e7eb;
+    --hover-bg: #f3f4f6;
+    --star-active: #f59e0b;
+    --star-inactive: #d1d5db;
+  }
 
-<div class="container mt-5">
-  <div class="card shadow rounded p-4">
-    <div class="row align-items-center">
-      <div class="col-md-3 text-center">
-        <!-- Avatar (placeholder) -->
-        <img src="https://i.pravatar.cc/150?u=<%= user._id %>" alt="Avatar" class="rounded-circle img-fluid mb-3" style="width: 150px; height: 150px;">
+  /* Rating stars */
+  .rating-stars {
+    color: var(--star-inactive);
+    font-size: 1.25rem;
+    letter-spacing: 0.15rem;
+  }
+
+  .rating-stars .bi-star-fill {
+    color: var(--star-active);
+  }
+
+  /* Tabs navigation */
+  .nav-tabs {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .nav-tabs .nav-link {
+    border: none;
+    color: var(--muted-text);
+    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+    transition: all 0.2s ease;
+    background-color: red;
+  }
+
+  .nav-tabs .nav-link:hover {
+    background-color: red;
+    color: var(--primary-color);
+   
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  .nav-tabs .nav-link.active {
+    
+    color: var(--primary-color);
+    font-weight: 600;
+    border-bottom: 3px solid var(--primary-color);
+    background-color: black;
+  }
+
+  /* List items */
+  .list-group-item {
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem !important;
+    margin-bottom: 0.75rem;
+    transition: all 0.2s ease;
+  }
+
+  .list-group-item:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .list-group-item:hover * {
+    color: white !important;
+  }
+
+  .list-group-item:hover .text-muted {
+    opacity: 0.8;
+  }
+
+  /* Card enhancements */
+  .card {
+    border: none;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header {
+    background-color: white;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  /* Modal styles */
+  .logout-modal .modal-header {
+    border-bottom: none;
+  }
+  .logout-modal .modal-footer {
+    border-top: none;
+  }
+</style>
+
+<!-- Logout Confirmation Modal -->
+<div class="modal fade logout-modal" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-
-      <div class="col-md-9">
-        <h2><%= user.username %></h2>
-        <p class="text-muted">Email: <%= user.email %></p>
-
-        <p><strong>Joined:</strong> <%= user.createdAt ? user.createdAt.toDateString() : "N/A" %></p>
-
-        <% if (user.listings) { %>
-          <p><strong>Your Listings:</strong> <%= user.listings.length %></p>
-        <% } %>
-
-        <% if (user.reviews) { %>
-          <p><strong>Your Reviews:</strong> <%= user.reviews.length %></p>
-        <% } %>
-
-        <div class="mt-4 d-flex gap-3">
-          
-          <a href="/logout" class="btn btn-outline-danger">Logout</a>
-        </div>
+      <div class="modal-body">
+        <p>Are you sure you want to logout?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="/logout" class="btn btn-danger">Logout</a>
       </div>
     </div>
   </div>
 </div>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body text-center">
+          <img src="https://i.pravatar.cc/150?u=<%= user._id %>" alt="Profile Picture" 
+               class="rounded-circle img-thumbnail mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+          
+          <h3 class="mb-1"><%= user.username %></h3>
+          <p class="text-muted mb-3"><i class="bi bi-envelope-fill"></i> <%= user.email %></p>
+          
+          <div class="d-flex justify-content-center gap-2 mb-3">
+            <div class="text-center px-3">
+              <h5 class="mb-0"><%= user.listings ? user.listings.length : 0 %></h5>
+              <small class="text-muted">Listings</small>
+            </div>
+            <div class="text-center px-3">
+              <h5 class="mb-0"><%= user.reviews ? user.reviews.length : 0 %></h5>
+              <small class="text-muted">Reviews</small>
+            </div>
+          </div>
+          
+          <div class="d-grid gap-2">
+            <a href="/listings/new" class="btn btn-primary">
+              <i class="fa-solid fa-plus me-1"></i> Create New Listing
+            </a>
+            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">
+              <i class="fa-solid fa-sign-out-alt me-1"></i> Logout
+            </button>
+          </div>
+        </div>
+      </div>
+
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title"><i class="bi bi-info-circle"></i> Member Since</h5>
+            <p class="card-text">
+              <% if (user.createdAt) { %>
+                <%= new Date(user.createdAt).toLocaleDateString('en-US', { year: 'numeric' , month: 'long' ,
+                  day: 'numeric' }) %>
+                  <% } else { %>
+                    N/A
+                    <% } %>
+            </p>
+
+            <% if (user.bio) { %>
+              <h5 class="card-title mt-3"><i class="bi bi-person-lines-fill"></i> About</h5>
+              <p class="card-text">
+                <%= user.bio %>
+              </p>
+              <% } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8">
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-white">
+            <ul class="nav nav-tabs card-header-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" href="#listings" data-bs-toggle="tab">Your Listings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#reviews" data-bs-toggle="tab">Your Reviews</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="listings">
+                <% if (user.listings && user.listings.length> 0) { %>
+                  <div class="list-group">
+                    <% user.listings.forEach(listing=> { %>
+                      <a href="/listings/<%= listing._id %>" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                          <h5 class="mb-1">
+                            <%= listing.title || 'Untitled Listing' %>
+                          </h5>
+                          <small>₹ <%= listing.price ? listing.price.toFixed(2) : '0.00' %></small>
+                        </div>
+                        <p class="mb-1">
+                          <%= listing.description ? listing.description.substring(0, 100) + (listing.description.length>
+                            100 ? '...' : '') : 'No description available' %>
+                        </p>
+                        <small>
+                          Created:
+                          <% if (listing.createdAt) { %>
+                            <%= new Date(listing.createdAt).toLocaleDateString() %>
+                              <% } else { %>
+                                Date not available
+                                <% } %>
+                        </small>
+                      </a>
+                      <% }); %>
+                  </div>
+                  <% } else { %>
+                    <div class="text-center py-4">
+                      <i class="bi bi-house-door text-muted" style="font-size: 3rem;"></i>
+                      <h5 class="my-3">No listings yet</h5>
+                      <a href="/listings/new" class="btn btn-primary">Create your first listing</a>
+                    </div>
+                    <% } %>
+              </div>
+
+              <div class="tab-pane fade" id="reviews">
+                <% if (user.reviews && user.reviews.length> 0) { %>
+                  <div class="list-group">
+                    <% user.reviews.forEach(review=> { %>
+                      <div class="list-group-item">
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="rating-stars">
+                            <% const rating=review.rating || 0 %>
+                              <% for (let i=1; i <=5; i++) { %>
+                                <i class="bi bi-star<%= i <= rating ? '-fill text-warning' : '' %>"></i>
+                                <% } %>
+                          </div>
+                          <small class="ms-auto text-muted">
+                            <% if (review.createdAt) { %>
+                              <%= new Date(review.createdAt).toLocaleDateString() %>
+                                <% } else { %>
+                                  Date not available
+                                  <% } %>
+                          </small>
+                        </div>
+                        <p class="mb-1">
+                          <%= review.comment || 'No comment provided' %>
+                        </p>
+                        <% if (review.listing) { %>
+                          <small>On: <a href="/listings/<%= review.listing._id %>">
+                              <%= review.listing.title || 'Untitled Listing' %>
+                            </a></small>
+                          <% } %>
+                      </div>
+                      <% }); %>
+                  </div>
+                  <% } else { %>
+                    <div class="text-center py-4">
+                      <i class="bi bi-chat-square-text text-muted" style="font-size: 3rem;"></i>
+                      <h5 class="my-3">No reviews yet</h5>
+                      <p class="text-muted">Your reviews will appear here once you write some.</p>
+                    </div>
+                    <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Optional: Add some JavaScript for better modal interaction
+  document.addEventListener('DOMContentLoaded', function() {
+    const logoutModal = document.getElementById('logoutModal');
+    
+    // Focus the Cancel button when modal opens
+    logoutModal.addEventListener('shown.bs.modal', function() {
+      document.querySelector('#logoutModal .btn-secondary').focus();
+    });
+    
+    // You can add more interactive behaviors here if needed
+  });
+</script>
