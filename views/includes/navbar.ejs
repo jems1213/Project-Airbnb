@@ -17,6 +17,11 @@
     gap: 0.5rem;
   }
 
+  .nav-link1 {
+    color: white !important;
+    transition: all 0.3s ease-in-out;
+  }
+
   .nav-link {
     color: white !important;
     font-weight: 500;
@@ -89,7 +94,7 @@
     }
 
     /* vadharani */
-  
+
   }
 </style>
 
@@ -101,7 +106,8 @@
     </a>
 
     <!-- Toggler -->
-    <button class="navbar-toggler text-white border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+    <button class="navbar-toggler text-white border-white" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -110,13 +116,13 @@
       <div class="navbar-nav me-auto">
         <a class="nav-link" href="/listings"><i class="fa-solid fa-earth-americas me-1"></i>Explore</a>
         <a class="nav-link" href="/listings/new"><i class="fa-solid fa-plus me-1"></i>Create Listing</a>
-       
+
       </div>
 
       <!-- Search input -->
       <!-- <div class="d-none d-md-block me-3 search-wrapper"> -->
       <!--  <i class="fa fa-search"></i> -->
-        <!-- <input type="text" class="search-inp ps-4" placeholder="Search..." />
+      <!-- <input type="text" class="search-inp ps-4" placeholder="Search..." />
       </div> -->
 
       <!-- Auth Buttons -->
@@ -124,12 +130,12 @@
         <% if (!currUser) { %>
           <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus me-1"></i>Sign up</a>
           <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket me-1"></i>Log in</a>
-        <% } %>
-       
-         <% if (currUser) { %>
-          <a class="nav-link" href="/profile"><i class="fa-solid fa-user me-0"></i></a>
-        <% } %>
-       
+          <% } %>
+
+            <% if (currUser) { %>
+              <a class="nav-link1" href="/profile"><i class="fa-solid fa-circle-user mb-3 fa-2xl fa-circle-info "></i></a>
+              <% } %>
+
       </div>
     </div>
   </div>
