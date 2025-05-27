@@ -1,33 +1,272 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  .login-hero {
+    background: linear-gradient(135deg, rgba(117,56,59,0.9) 0%, rgba(255,126,95,0.9) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+
+  .login-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .login-image {
+    background: url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+    min-height: 400px;
+  }
+
+  .login-content {
+    padding: 2.5rem 2rem;
+  }
+
+  .login-title {
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .login-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 4px;
+    background: linear-gradient(90deg, #75383b, #ff7e5f);
+    margin-top: 0.5rem;
+  }
+
+  .form-control {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    transition: all 0.3s;
+  }
+
+  .form-control:focus {
+    border-color: #75383b;
+    box-shadow: 0 0 0 0.25rem rgba(117, 56, 59, 0.15);
+  }
+
+  .form-floating>.form-control:focus~label {
+    color: #75383b;
+  }
+
+  .btn-login {
+    background: linear-gradient(90deg, #75383b, #ff7e5f);
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    width: 100%;
+  }
+
+  .btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(117, 56, 59, 0.3);
+  }
+
+  .password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+  width: 20px;
+  text-align: center;
+}
 
 
+  .divider {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    color: #999;
+  }
+
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #eee;
+  }
+
+  .divider::before {
+    margin-right: 1rem;
+  }
+
+  .divider::after {
+    margin-left: 1rem;
+  }
+
+  .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background: white;
+    transition: all 0.3s;
+    font-weight: 500;
+    color: #555;
+    width: 100%;
+  }
+
+  .social-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+
+  .social-icon {
+    margin-right: 8px;
+    font-size: 1.1rem;
+  }
+
+  .google { color: #DB4437; }
+  .facebook { color: #4267B2; }
+  .apple { color: #000; }
+
+  .login-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #666;
+  }
+
+  .login-footer a {
+    color: #75383b;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .login-footer a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .login-image {
+      display: none;
+    }
+
+    .login-content {
+      padding: 2rem 1.5rem;
+    }
+
+    .social-btn span {
+      display: none;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .login-hero {
+      padding: 1rem 0.5rem;
+    }
+
+    .login-title {
+      font-size: 1.5rem;
+    }
+
+    .btn-login {
+      font-size: 0.95rem;
+    }
+
+    .social-icon {
+      font-size: 1rem;
+    }
+  }
+</style>
 
 
-<% layout("/layouts/boilerplate")%>
+  <div class="container">
+    <div class="row g-0 login-card">
+      <!-- Image Section -->
+      <div class="col-md-6 login-image d-none d-md-block"></div>
 
-<div class="row mt-3 ">
-    <h1 class="col-6 offset-3 mb-3">Login </h1>
-    <div class="col-6 offset-3 ">
+      <!-- Form Section -->
+      <div class="col-md-6 col-12 login-content">
+        <h1 class="login-title">Welcome Back</h1>
+        <p class="text-muted mb-4">Sign in to continue to your WanderLust account</p>
+
         <form action="/login" method="POST" class="needs-validation" novalidate>
-            <div class="mb-3">  
-              <label for="username" class="form-label"> <b>Username</b> </label>
-              <input 
-                name="username" 
-                id="username"
-                type="text"  
-                class="form-control" 
-                required/>       
-            </div>
+          <!-- Username -->
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="username" name="username" placeholder="name@example.com" required>
+            <label for="username">Username or Email</label>
+            <div class="invalid-feedback">Please enter your username or email.</div>
+          </div>
 
-            <div class="mb-3">  
-                <label for="password" class="form-label"> <b>Password</b> </label>
-                <input 
-                  name="password" 
-                  id="password"
-                  type="password"  
-                  class="form-control" 
-                  required/>
-              </div>
-        <button class="btn btn-success">login</button>
+          <!-- Password -->
+          <div class="form-floating mb-3 position-relative">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <label for="password">Password</label>
+            <i class="far fa-eye password-toggle" id="togglePassword" style="display: none;"></i>
+
+            <div class="invalid-feedback">Please enter your password.</div>
+          </div>
+
+          <!-- Forgot link -->
+          <div class="login-footer mb-3">
+            Don't have an account? <a href="/signup">Create one</a>
+          </div>
+
+          <!-- Submit -->
+          <button class="btn btn-primary btn-login mb-3" type="submit">
+            <i class="fas fa-sign-in-alt me-2"></i> Login
+          </button>
+
+          <!-- Divider -->
+          <div class="divider">or</div>
+
+          <!-- Social Login -->
+          <div class="row g-2 mb-4">
+            <div class="col-4">
+              <a href="/auth/google" class="social-btn">
+                <i class="fab fa-google social-icon google"></i><span>Google</span>
+              </a>
+            </div>
+            <div class="col-4">
+              <a href="/auth/facebook" class="social-btn">
+                <i class="fab fa-facebook-f social-icon facebook"></i><span>Facebook</span>
+              </a>
+            </div>
+            <div class="col-4">
+              <a href="/auth/apple" class="social-btn">
+                <i class="fab fa-apple social-icon apple"></i><span>Apple</span>
+              </a>
+            </div>
+          </div>
         </form>
+      </div>
     </div>
-</div>
+  </div>
+
+
+<script>
+  const password = document.getElementById('password');
+  const togglePassword = document.getElementById('togglePassword');
+
+  // Hide icon by default
+  togglePassword.style.display = 'none';
+
+  // Show/hide icon when user types
+  password.oninput = () => {
+    togglePassword.style.display = password.value ? 'block' : 'none';
+  };
+
+  // Toggle visibility on click
+  togglePassword.onclick = () => {
+    const type = password.type === 'password' ? 'text' : 'password';
+    password.type = type;
+    togglePassword.classList.toggle('fa-eye-slash');
+  };
+</script>

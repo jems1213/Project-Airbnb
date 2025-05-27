@@ -1,44 +1,239 @@
+<% layout("/layouts/boilerplate") %>
 
+<style>
+  .signup-container {
+    max-width: 520px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  }
 
-<% layout("/layouts/boilerplate")%>
+  .signup-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
 
-<div class="row mt-3 ">
-    <h1 class="col-6 offset-3 mb-3">Signup on WanderLust </h1>
-    <div class="col-6 offset-3 ">
-        <form action="/signup" method="POST" class="needs-validation" novalidate>
-            <div class="mb-3">  
-              <label for="username" class="form-label"> <b>Username</b> </label>
-              <input 
-                name="username" 
-                id="username"
-                type="text"  
-                class="form-control" 
-                required/>
-              <div class="valid-feedback">looks good!!</div>
-            </div>
+  .signup-title {
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
 
-            <div class="mb-3">  
-              <label for="email" class="form-label"> <b>Email</b> </label>
-              <input 
-                name="email" 
-                id="email"
-                type="email"  
-                class="form-control" 
-                required/>
-              <div class="valid-feedback">looks good!!</div>
-            </div>
+  .signup-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #75383b, #ff7e5f);
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+  }
 
-            <div class="mb-3">  
-                <label for="password" class="form-label"> <b>Password</b> </label>
-                <input 
-                  name="password" 
-                  id="password"
-                  type="password"  
-                  class="form-control" 
-                  required/>
-                <div class="valid-feedback">password looks strong!!</div>
-              </div>
-        <button class="btn btn-success">signup</button>
-        </form>
+  .signup-subtitle {
+    font-size: 0.95rem;
+    color: #666;
+  }
+
+  .form-label {
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 0.25rem;
+  }
+
+  .input-group-text {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    color: #75383b;
+  }
+
+  .form-control {
+    border-radius: 8px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .form-control:focus {
+    border-color: #75383b;
+    box-shadow: 0 0 0 0.2rem rgba(117, 56, 59, 0.15);
+  }
+
+  .btn-signup {
+    background: linear-gradient(90deg, #75383b, #ff7e5f);
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-weight: 600;
+    color: white;
+    border-radius: 8px;
+    margin-top: 1rem;
+    transition: all 0.3s;
+  }
+
+  .btn-signup:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(117, 56, 59, 0.25);
+  }
+
+  .password-group {
+    position: relative;
+  }
+
+  .password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+    font-size: 1rem;
+    z-index: 10;
+  }
+
+  .password-strength {
+    height: 5px;
+    border-radius: 3px;
+    background: #eee;
+    margin-top: 6px;
+    overflow: hidden;
+  }
+
+  .password-strength-bar {
+    height: 100%;
+    width: 0%;
+    background: #75383b;
+    transition: width 0.3s ease-in-out;
+  }
+
+  .login-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #555;
+  }
+
+  .login-link a {
+    color: #75383b;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 576px) {
+    .signup-container {
+      padding: 1.75rem 1.25rem;
+    }
+  }
+</style>
+
+<div class="container">
+  <div class="signup-container">
+    <div class="signup-header">
+      <h1 class="signup-title">Join WanderLust</h1>
+      <p class="signup-subtitle">Create your account to start exploring</p>
     </div>
+
+    <form action="/signup" method="POST" class="needs-validation" novalidate>
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
+          <input type="text" name="username" id="username" class="form-control" placeholder="Choose a username" required />
+          <div class="invalid-feedback">Please choose a username.</div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+          <input type="email" name="email" id="email" class="form-control" placeholder="Your email address" required />
+          <div class="invalid-feedback">Please enter a valid email.</div>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3 password-group">
+        <label for="password" class="form-label">Password</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-lock"></i></span>
+          <input type="password" name="password" id="password" class="form-control" placeholder="Create a password" required />
+          <i class="far fa-eye password-toggle" id="togglePassword"></i>
+          <div class="invalid-feedback">Please enter a password.</div>
+        </div>
+        <div class="password-strength">
+          <div class="password-strength-bar" id="passwordStrengthBar"></div>
+        </div>
+        <small class="text-muted" id="passwordStrengthFeedback"></small>
+      </div>
+
+      <button type="submit" class="btn btn-signup">
+        <i class="fas fa-user-plus me-2"></i> Create Account
+      </button>
+    </form>
+
+    <div class="login-link">
+      Already have an account? <a href="/login">Log in</a>
+    </div>
+  </div>
 </div>
+
+<script>
+  // Password toggle
+  const toggle = document.getElementById('togglePassword');
+  const passwordInput = document.getElementById('password');
+
+  toggle.addEventListener('click', () => {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    toggle.classList.toggle('fa-eye-slash');
+  });
+
+  // Password strength
+  const strengthBar = document.getElementById('passwordStrengthBar');
+  const feedback = document.getElementById('passwordStrengthFeedback');
+
+  passwordInput.addEventListener('input', () => {
+    const pwd = passwordInput.value;
+    let score = 0;
+
+    if (pwd.length > 5) score += 20;
+    if (pwd.length >= 8) score += 20;
+    if (/[A-Z]/.test(pwd)) score += 20;
+    if (/[0-9]/.test(pwd)) score += 20;
+    if (/[\W_]/.test(pwd)) score += 20;
+
+    strengthBar.style.width = score + '%';
+
+    if (score < 40) {
+      strengthBar.style.background = '#dc3545';
+      feedback.textContent = 'Weak password';
+    } else if (score < 80) {
+      strengthBar.style.background = '#ffc107';
+      feedback.textContent = 'Moderate password';
+    } else {
+      strengthBar.style.background = '#28a745';
+      feedback.textContent = 'Strong password';
+    }
+  });
+
+  // Bootstrap validation
+  (() => {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>
