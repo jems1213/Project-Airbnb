@@ -1,3 +1,4 @@
+<!-- Font Awesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
 <style>
@@ -68,12 +69,11 @@
     color: #999;
   }
 
-  /* Profile icon styles */
   .profile-icon {
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     transition: all 0.3s ease;
-    margin-left: 0.5rem;
+    z-index: 1000;
   }
 
   .profile-icon:hover {
@@ -84,10 +84,6 @@
   @media (max-width: 768px) {
     .search-inp {
       width: 100%;
-    }
-
-    .navbar-collapse {
-      margin-top: 1rem;
     }
 
     .auth-buttons {
@@ -101,46 +97,30 @@
       width: auto;
       text-align: center;
     }
-
-    /* Adjust profile icon for mobile */
-    .profile-icon {
-      margin-left: 0;
-      margin-top: 0;
-    }
   }
 </style>
 
-<nav class="navbar navbar-expand-md sticky-top">
-  <div class="container">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-md sticky-top position-relative">
+  <div class="container d-flex justify-content-between align-items-center position-relative">
     <!-- Brand -->
     <a class="navbar-brand" href="/listings">
       <i class="fa-regular fa-compass"></i> WanderLust
     </a>
 
-    <!-- Toggler -->
-    <button class="navbar-toggler text-white border-white" type="button" data-bs-toggle="collapse"
-      data-bs-target="#navbarNavAltMarkup">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav me-auto">
-        <a class="nav-link" href="/listings"><i class="fa-solid fa-earth-americas me-1"></i>Explore</a>
-        <a class="nav-link" href="/listings/new"><i class="fa-solid fa-plus me-1"></i>Create Listing</a>
-      </div>
-
-      <!-- Auth Buttons -->
-      <div class="d-flex flex-column flex-md-row auth-buttons align-items-md-center">
-        <% if (!currUser) { %>
-          <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus me-1"></i>Sign up</a>
-          <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket me-1"></i>Log in</a>
-        <% } %>
-
-        <% if (currUser) { %>
-          <a class="profile-icon" href="/profile"><i class="fa-solid fa-xl fa-circle-user"></i></a>
-        <% } %>
-      </div>
+    <!-- Auth Buttons (Always visible) -->
+    <div class="d-flex flex-row auth-buttons align-items-center ms-auto">
+      <% if (!currUser) { %>
+        <a class="nav-link" href="/signup"><i class="fa-solid fa-user-plus me-1"></i>Sign up</a>
+        <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket me-1"></i>Log in</a>
+      <% } %>
     </div>
+
+    <!-- Profile Icon -->
+    <% if (currUser) { %>
+      <a class="profile-icon ms-3" href="/profile">
+        <i class="fa-solid fa-circle-user fa-xl"></i>
+      </a>
+    <% } %>
   </div>
 </nav>
